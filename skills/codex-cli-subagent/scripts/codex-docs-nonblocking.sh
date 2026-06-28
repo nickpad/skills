@@ -31,8 +31,9 @@ read_prompt() {
 PROMPT="$(read_prompt "$@")"
 BASE_DIR="${TMPDIR:-/tmp}/codex-subagent"
 mkdir -p "$BASE_DIR"
-RUN_DIR="$BASE_DIR/run-$(date +%Y%m%d-%H%M%S)"
-mkdir -p "$RUN_DIR"
+# mktemp -d makes the run dir atomically, so concurrent launches in the same
+# second never collide or clobber each other's files.
+RUN_DIR="$(mktemp -d "${BASE_DIR}/run-$(date +%Y%m%d-%H%M%S)-XXXXXX")"
 PROMPT_FILE="$RUN_DIR/prompt.txt"
 FINAL_FILE="$RUN_DIR/final.md"
 EVENTS_FILE="$RUN_DIR/events.jsonl"

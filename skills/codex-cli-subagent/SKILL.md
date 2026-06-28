@@ -128,8 +128,7 @@ When finished, read:
 
 ```bash
 mkdir -p /tmp/codex-subagent
-RUN_DIR="/tmp/codex-subagent/$(date +%Y%m%d-%H%M%S)"
-mkdir -p "$RUN_DIR"
+RUN_DIR="$(mktemp -d "/tmp/codex-subagent/run-$(date +%Y%m%d-%H%M%S)-XXXXXX")"
 nohup codex --search exec \
   --sandbox read-only \
   --skip-git-repo-check \
