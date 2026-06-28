@@ -41,8 +41,7 @@ PID_FILE="$RUN_DIR/pid"
 
 printf '%s\n' "$PROMPT" > "$PROMPT_FILE"
 
-nohup codex exec \
-    --search \
+nohup codex --search exec \
     --sandbox read-only \
     --skip-git-repo-check \
     --ephemeral \

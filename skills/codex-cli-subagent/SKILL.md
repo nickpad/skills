@@ -81,8 +81,7 @@ This runs `codex exec` in read-only mode with web search enabled, waits for comp
 ### Raw command
 
 ```bash
-codex exec \
-  --search \
+codex --search exec \
   --sandbox read-only \
   --skip-git-repo-check \
   --ephemeral \
@@ -131,8 +130,7 @@ When finished, read:
 mkdir -p /tmp/codex-subagent
 RUN_DIR="/tmp/codex-subagent/$(date +%Y%m%d-%H%M%S)"
 mkdir -p "$RUN_DIR"
-nohup codex exec \
-  --search \
+nohup codex --search exec \
   --sandbox read-only \
   --skip-git-repo-check \
   --ephemeral \
@@ -148,7 +146,7 @@ echo $! > "$RUN_DIR/pid"
 
 For docs research, prefer these Codex flags:
 
-- `--search` — lets Codex search the web
+- `--search` — lets Codex search the web. This is a **global** flag and must come **before** the `exec` subcommand (e.g. `codex --search exec ...`), not after it; `codex exec --search ...` fails with `unexpected argument '--search'`. It is listed under `codex --help`, not `codex exec --help`.
 - `--sandbox read-only` — prevents edits
 - `--ephemeral` — avoids cluttering saved sessions
 - `--output-last-message <file>` — makes result capture easy

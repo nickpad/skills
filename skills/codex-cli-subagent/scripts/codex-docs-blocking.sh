@@ -34,8 +34,7 @@ mkdir -p "$OUT_DIR"
 STAMP="$(date +%Y%m%d-%H%M%S)"
 OUT_FILE="$OUT_DIR/blocking-$STAMP.md"
 
-codex exec \
-    --search \
+codex --search exec \
     --sandbox read-only \
     --skip-git-repo-check \
     --ephemeral \
